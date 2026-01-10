@@ -70,11 +70,16 @@ class CustomNavbar extends HTMLElement {
         }
 
         .mobile-menu-button {
-          display: none;
-          background: none;
-          border: none;
-          cursor: pointer;
-        }
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-menu-button svg {
+  stroke: #415232; /* <-- sets the burger color */
+}
+
 
         .mobile-menu {
           display: none;
