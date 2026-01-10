@@ -1,13 +1,14 @@
+
 /* Base styles */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     line-height: 1.6;
-    color: #000;
+    color: #000000;
+    background-color: #ffffff;
 }
-
 /* Accessibility focus styles */
 :focus {
-    outline: 3px solid #415232;
+    outline: 3px solid #2a525a;
     outline-offset: 2px;
 }
 
@@ -17,12 +18,11 @@ body {
     top: -40px;
     left: 0;
     background: #415232;
-    color: white;
+    color: #ffffff;
     padding: 8px;
     z-index: 100;
     transition: top 0.3s;
 }
-
 .skip-link:focus {
     top: 0;
 }
@@ -48,6 +48,21 @@ body {
         scroll-behavior: auto !important;
     }
 }
+/* Blog post line clamp */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+/* Publication images */
+.publication-img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
 
 /* Print styles */
 @media print {
@@ -66,5 +81,4 @@ body {
         font-size: 0.8em;
         font-weight: normal;
     }
-
 }
