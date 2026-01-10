@@ -40,7 +40,16 @@ async function fetchBlogPosts() {
 }
 
 // Mobile menu functionality
-document.addEventListener('DOMContentLoaded', function() {
+const setIcon = (open) => {
+  button.innerHTML = `<i data-feather="${open ? 'x' : 'menu'}"></i>`;
+  if (window.feather) {
+    window.feather.replace({ root: this.shadowRoot });
+    // Set color after replacement
+    const svg = button.querySelector('svg');
+    if (svg) svg.setAttribute('stroke', '#415232');
+  }
+};
+
     // Fetch blog posts when page loads
     fetchBlogPosts();
     
@@ -70,3 +79,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
