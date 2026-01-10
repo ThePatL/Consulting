@@ -5,12 +5,11 @@ class CustomFooter extends HTMLElement {
       <style>
         :host {
           display: block;
-          background: linear-gradient(to right, #7c3aed, #db2777);
-          color: white;
+          background: #415232;
+          color: #ffffff;
           padding: 3rem 2rem;
         }
-        
-        .footer-container {
+.footer-container {
           max-width: 1280px;
           margin: 0 auto;
           display: grid;
@@ -34,9 +33,8 @@ class CustomFooter extends HTMLElement {
           display: flex;
           gap: 1rem;
         }
-        
         .social-links a {
-          color: white;
+          color: #ffffff;
           width: 40px;
           height: 40px;
           border-radius: 50%;
@@ -48,10 +46,9 @@ class CustomFooter extends HTMLElement {
         }
         
         .social-links a:hover {
-          background-color: rgba(255, 255, 255, 0.2);
+          background-color: #2a525a;
         }
-        
-        .footer-heading {
+.footer-heading {
           font-size: 1.125rem;
           font-weight: 600;
           margin-bottom: 1.5rem;
@@ -62,18 +59,16 @@ class CustomFooter extends HTMLElement {
           flex-direction: column;
           gap: 0.75rem;
         }
-        
         .footer-links a {
-          color: rgba(255, 255, 255, 0.8);
+          color: #c7cdbf;
           text-decoration: none;
           transition: color 0.3s;
         }
         
         .footer-links a:hover {
-          color: white;
+          color: #ffffff;
         }
-        
-        .footer-bottom {
+.footer-bottom {
           max-width: 1280px;
           margin: 3rem auto 0;
           padding-top: 2rem;
