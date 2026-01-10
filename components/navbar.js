@@ -69,24 +69,39 @@ class CustomNavbar extends HTMLElement {
           width: 100%;
         }
 
+        /* Mobile menu button */
         .mobile-menu-button {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
+          display: none; /* hidden by default, shown on mobile */
+          background: none;
+          border: none;
+          cursor: pointer;
+          width: 2rem;
+          height: 2rem;
+          padding: 0.25rem;
+        }
 
-.mobile-menu-button svg {
-  stroke: #415232; /* <-- sets the burger color */
-}
+        .mobile-menu-button svg {
+          stroke: #415232;
+          width: 2rem;
+          height: 2rem;
+        }
 
-
+        /* Mobile menu styling */
         .mobile-menu {
           display: none;
           flex-direction: column;
           gap: 1rem;
-          padding: 1rem 2rem 1.5rem;
+          padding: 0;
+          overflow: hidden;
+          max-height: 0;
+          transition: max-height 0.3s ease, padding 0.3s ease;
           background: white;
+        }
+
+        .mobile-menu.open {
+          display: flex;
+          padding: 1rem 2rem 1.5rem;
+          max-height: 500px; /* enough for all links */
         }
 
         .mobile-menu a {
@@ -99,17 +114,14 @@ class CustomNavbar extends HTMLElement {
           color: #415232;
         }
 
-        .mobile-menu.open {
-          display: flex;
-        }
-
-        @media (max-width: 768px) {
+        /* Responsive */
+        @media (max-width: 800px) {
           .nav-links {
-            display: none;
+            display: none !important;
           }
 
           .mobile-menu-button {
-            display: block;
+            display: block !important;
           }
         }
       </style>
@@ -145,17 +157,24 @@ class CustomNavbar extends HTMLElement {
     const mobileMenu = this.shadowRoot.querySelector('.mobile-menu');
     const mobileLinks = mobileMenu.querySelectorAll('a');
 
+    // Function to update burger/X icon
     const setIcon = (open) => {
       button.innerHTML = `<i data-feather="${open ? 'x' : 'menu'}"></i>`;
-      window.feather.replace({ root: this.shadowRoot });
+      if (window.feather) {
+        window.feather.replace({ root: this.shadowRoot });
+        const svg = button.querySelector('svg');
+        if (svg) svg.setAttribute('stroke', '#415232');
+      }
     };
 
+    // Toggle menu on button click
     button.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.toggle('open');
       button.setAttribute('aria-expanded', isOpen);
       setIcon(isOpen);
     });
 
+    // Close menu when a link is clicked
     mobileLinks.forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('open');
@@ -167,6 +186,8 @@ class CustomNavbar extends HTMLElement {
     // Initial Feather icon render
     if (window.feather) {
       window.feather.replace({ root: this.shadowRoot });
+      const svg = this.shadowRoot.querySelector('.mobile-menu-button svg');
+      if (svg) svg.setAttribute('stroke', '#415232');
     }
   }
 }
