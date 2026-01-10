@@ -141,14 +141,15 @@ class CustomNavbar extends HTMLElement {
     const mobileMenu = this.shadowRoot.querySelector('.mobile-menu');
 
     button.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.toggle('open');
-      button.setAttribute('aria-expanded', isOpen);
-    });
+  const isOpen = mobileMenu.classList.toggle('open');
+  button.setAttribute('aria-expanded', isOpen);
+});
 
-    // Feather icons need to be re-rendered inside Shadow DOM
-    if (window.feather) {
-      window.feather.replace();
-    }
+// IMPORTANT: Feather must target the Shadow DOM
+if (window.feather) {
+  window.feather.replace({ root: this.shadowRoot });
+}
+
   }
 }
 
