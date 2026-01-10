@@ -26,7 +26,7 @@ class CustomNavbar extends HTMLElement {
         .logo {
           font-weight: 800;
           font-size: 1.5rem;
-          color: #7c3aed;
+          color: #415232;
           text-decoration: none;
           display: flex;
           align-items: center;
@@ -34,19 +34,14 @@ class CustomNavbar extends HTMLElement {
         }
         
         .logo span {
-          background: linear-gradient(to right, #7c3aed, #db2777);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
+          color: #2a525a;
         }
-        
-        .nav-links {
+.nav-links {
           display: flex;
           gap: 2rem;
         }
-        
         .nav-links a {
-          color: #4b5563;
+          color: #000000;
           text-decoration: none;
           font-weight: 500;
           position: relative;
@@ -54,7 +49,7 @@ class CustomNavbar extends HTMLElement {
         }
         
         .nav-links a:hover {
-          color: #7c3aed;
+          color: #415232;
         }
         
         .nav-links a::after {
@@ -64,11 +59,10 @@ class CustomNavbar extends HTMLElement {
           left: 0;
           width: 0;
           height: 2px;
-          background: linear-gradient(to right, #7c3aed, #db2777);
+          background: #2a525a;
           transition: width 0.3s ease;
         }
-        
-        .nav-links a:hover::after {
+.nav-links a:hover::after {
           width: 100%;
         }
         
