@@ -69,9 +69,8 @@ class CustomNavbar extends HTMLElement {
           width: 100%;
         }
 
-        /* Mobile menu button */
         .mobile-menu-button {
-          display: none; /* hidden by default, shown on mobile */
+          display: none;
           background: none;
           border: none;
           cursor: pointer;
@@ -86,7 +85,6 @@ class CustomNavbar extends HTMLElement {
           height: 2rem;
         }
 
-        /* Mobile menu styling */
         .mobile-menu {
           display: none;
           flex-direction: column;
@@ -101,7 +99,7 @@ class CustomNavbar extends HTMLElement {
         .mobile-menu.open {
           display: flex;
           padding: 1rem 2rem 1.5rem;
-          max-height: 500px; /* enough for all links */
+          max-height: 500px;
         }
 
         .mobile-menu a {
@@ -114,12 +112,10 @@ class CustomNavbar extends HTMLElement {
           color: #415232;
         }
 
-        /* Responsive */
         @media (max-width: 800px) {
           .nav-links {
             display: none !important;
           }
-
           .mobile-menu-button {
             display: block !important;
           }
@@ -157,7 +153,15 @@ class CustomNavbar extends HTMLElement {
     const mobileMenu = this.shadowRoot.querySelector('.mobile-menu');
     const mobileLinks = mobileMenu.querySelectorAll('a');
 
-    // Function to update burger/X icon
+    // Wait until Feather is loaded
+    const waitForFeather = () => new Promise(resolve => {
+      const check = () => {
+        if (window.feather) resolve();
+        else requestAnimationFrame(check);
+      };
+      check();
+    });
+
     const setIcon = (open) => {
       button.innerHTML = `<i data-feather="${open ? 'x' : 'menu'}"></i>`;
       if (window.feather) {
@@ -167,28 +171,26 @@ class CustomNavbar extends HTMLElement {
       }
     };
 
-    // Toggle menu on button click
-    button.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.toggle('open');
-      button.setAttribute('aria-expanded', isOpen);
-      setIcon(isOpen);
-    });
+    waitForFeather().then(() => {
+      // Initial icon render
+      setIcon(false);
 
-    // Close menu when a link is clicked
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        button.setAttribute('aria-expanded', 'false');
-        setIcon(false);
+      // Toggle menu on click
+      button.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        button.setAttribute('aria-expanded', isOpen);
+        setIcon(isOpen);
+      });
+
+      // Close menu on link click
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          button.setAttribute('aria-expanded', 'false');
+          setIcon(false);
+        });
       });
     });
-
-    // Initial Feather icon render
-    if (window.feather) {
-      window.feather.replace({ root: this.shadowRoot });
-      const svg = this.shadowRoot.querySelector('.mobile-menu-button svg');
-      if (svg) svg.setAttribute('stroke', '#415232');
-    }
   }
 }
 
