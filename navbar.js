@@ -13,7 +13,7 @@ class CustomNavbar extends HTMLElement {
           backdrop-filter: blur(10px);
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         nav {
           max-width: 1280px;
           margin: 0 auto;
@@ -22,41 +22,38 @@ class CustomNavbar extends HTMLElement {
           justify-content: space-between;
           align-items: center;
         }
-        
+
         .logo {
           font-weight: 800;
           font-size: 1.5rem;
-          color: #7c3aed;
+          color: #415232;
           text-decoration: none;
           display: flex;
           align-items: center;
           gap: 0.5rem;
         }
-        
+
         .logo span {
-          background: linear-gradient(to right, #7c3aed, #db2777);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
+          color: #2a525a;
         }
-        
+
         .nav-links {
           display: flex;
           gap: 2rem;
         }
-        
+
         .nav-links a {
-          color: #4b5563;
+          color: #000000;
           text-decoration: none;
           font-weight: 500;
           position: relative;
           padding: 0.5rem 0;
         }
-        
+
         .nav-links a:hover {
-          color: #7c3aed;
+          color: #415232;
         }
-        
+
         .nav-links a::after {
           content: '';
           position: absolute;
@@ -64,51 +61,135 @@ class CustomNavbar extends HTMLElement {
           left: 0;
           width: 0;
           height: 2px;
-          background: linear-gradient(to right, #7c3aed, #db2777);
+          background: #2a525a;
           transition: width 0.3s ease;
         }
-        
+
         .nav-links a:hover::after {
           width: 100%;
         }
-        
+
+        /* Mobile menu button */
         .mobile-menu-button {
-          display: none;
+          display: none; /* hidden by default, shown on mobile */
           background: none;
           border: none;
-          color: #4b5563;
           cursor: pointer;
+          width: 2rem;
+          height: 2rem;
+          padding: 0.25rem;
         }
-        
-        @media (max-width: 768px) {
+
+        .mobile-menu-button svg {
+          stroke: #415232;
+          width: 2rem;
+          height: 2rem;
+        }
+
+        /* Mobile menu styling */
+        .mobile-menu {
+          display: none;
+          flex-direction: column;
+          gap: 1rem;
+          padding: 0;
+          overflow: hidden;
+          max-height: 0;
+          transition: max-height 0.3s ease, padding 0.3s ease;
+          background: white;
+        }
+
+        .mobile-menu.open {
+          display: flex;
+          padding: 1rem 2rem 1.5rem;
+          max-height: 500px; /* enough for all links */
+        }
+
+        .mobile-menu a {
+          color: #2a525a;
+          text-decoration: none;
+          font-weight: 500;
+        }
+
+        .mobile-menu a:hover {
+          color: #415232;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
           .nav-links {
-            display: none;
+            display: none !important;
           }
-          
+
           .mobile-menu-button {
-            display: block;
+            display: block !important;
           }
         }
       </style>
-      
+
       <nav>
         <a href="index.html" class="logo">
           Rainbow<span>Bridge</span>
         </a>
+
         <div class="nav-links">
           <a href="index.html">Home</a>
-          <a href="services.html">Services</a>
+          <a href="consulting.html">Services</a>
           <a href="about.html">About</a>
           <a href="resources.html">Resources</a>
           <a href="contact.html">Contact</a>
-</div>
-<button class="mobile-menu-button" aria-label="Open menu">
+        </div>
+
+        <button class="mobile-menu-button" aria-label="Toggle menu" aria-expanded="false">
           <i data-feather="menu"></i>
         </button>
       </nav>
+
+      <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="consulting.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="resources.html">Resources</a>
+        <a href="contact.html">Contact</a>
+      </div>
     `;
+
+    const button = this.shadowRoot.querySelector('.mobile-menu-button');
+    const mobileMenu = this.shadowRoot.querySelector('.mobile-menu');
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+
+    // Function to update burger/X icon
+    const setIcon = (open) => {
+      button.innerHTML = `<i data-feather="${open ? 'x' : 'menu'}"></i>`;
+      if (window.feather) {
+        window.feather.replace({ root: this.shadowRoot });
+        const svg = button.querySelector('svg');
+        if (svg) svg.setAttribute('stroke', '#415232');
+      }
+    };
+
+    // Toggle menu on button click
+    button.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      button.setAttribute('aria-expanded', isOpen);
+      setIcon(isOpen);
+    });
+
+    // Close menu when a link is clicked
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        button.setAttribute('aria-expanded', 'false');
+        setIcon(false);
+      });
+    });
+
+    // Initial Feather icon render
+    if (window.feather) {
+      window.feather.replace({ root: this.shadowRoot });
+      const svg = this.shadowRoot.querySelector('.mobile-menu-button svg');
+      if (svg) svg.setAttribute('stroke', '#415232');
+    }
   }
 }
-
 
 customElements.define('custom-navbar', CustomNavbar);
