@@ -85,7 +85,7 @@ class CustomNavbar extends HTMLElement {
         }
 
         .mobile-menu a {
-          color: #000;
+          color: #2a525a;
           text-decoration: none;
           font-weight: 500;
         }
