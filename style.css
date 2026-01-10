@@ -27,6 +27,21 @@ body {
     top: 0;
 }
 
+.mobile-menu-button {
+  display: none; /* hidden by default, shown on mobile via media query */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem; /* optional: gives it a tappable area */
+}
+
+.mobile-menu-button svg {
+  stroke: #415232; /* sets burger / X color */
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+
 /* High contrast mode */
 @media (prefers-contrast: more) {
     body {
@@ -82,3 +97,4 @@ body {
         font-weight: normal;
     }
 }
+
