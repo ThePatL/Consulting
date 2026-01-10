@@ -1,9 +1,52 @@
+
+// Fetch Substack blog posts
+async function fetchBlogPosts() {
+    try {
+        // Using a CORS proxy to fetch the RSS feed
+        const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://culturist.substack.com/feed`);
+        const data = await response.json();
+        
+        if (data.status === 'ok' && data.items && data.items.length > 0) {
+            const blogContainer = document.getElementById('blog-posts');
+            const postsToShow = data.items.slice(0, 3); // Get latest 3 posts
+            
+            postsToShow.forEach(post => {
+                const blogPost = document.createElement('div');
+                blogPost.className = 'bg-[#f8f9fa] rounded-lg overflow-hidden hover:shadow-md transition';
+                blogPost.innerHTML = `
+                    <div class="h-48 bg-[#c7cdbf] overflow-hidden">
+                        <img src="${post.thumbnail || 'http://static.photos/education/640x360/1'}" alt="${post.title}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-[#415232] mb-2">${post.title}</h3>
+                        <p class="text-[#000000] text-sm mb-4">${new Date(post.pubDate).toLocaleDateString()}</p>
+                        <p class="text-[#000000] mb-4 line-clamp-2">${post.description.replace(/<[^>]*>/g, '').substring(0, 120)}...</p>
+                        <a href="${post.link}" target="_blank" rel="noopener" class="text-[#763e19] font-medium hover:underline inline-flex items-center gap-1">
+                            Read More <i data-feather="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                `;
+                blogContainer.appendChild(blogPost);
+            });
+            
+            // Refresh feather icons after adding new content
+            if (feather) {
+                feather.replace();
+            }
+        }
+    } catch (error) {
+        console.error('Error fetching blog posts:', error);
+    }
+}
+
 // Mobile menu functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Fetch blog posts when page loads
+    fetchBlogPosts();
+    
     // This would be used for any shared JavaScript functionality
     // Currently the contact form is handled in the contact.html file
-    
-    // Initialize feather icons
+// Initialize feather icons
     if (feather) {
         feather.replace();
     }
