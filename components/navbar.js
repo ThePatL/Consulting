@@ -76,7 +76,6 @@ class CustomNavbar extends HTMLElement {
           cursor: pointer;
         }
 
-        /* Mobile menu */
         .mobile-menu {
           display: none;
           flex-direction: column;
@@ -139,17 +138,31 @@ class CustomNavbar extends HTMLElement {
 
     const button = this.shadowRoot.querySelector('.mobile-menu-button');
     const mobileMenu = this.shadowRoot.querySelector('.mobile-menu');
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+
+    const setIcon = (open) => {
+      button.innerHTML = `<i data-feather="${open ? 'x' : 'menu'}"></i>`;
+      window.feather.replace({ root: this.shadowRoot });
+    };
 
     button.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('open');
-  button.setAttribute('aria-expanded', isOpen);
-});
+      const isOpen = mobileMenu.classList.toggle('open');
+      button.setAttribute('aria-expanded', isOpen);
+      setIcon(isOpen);
+    });
 
-// IMPORTANT: Feather must target the Shadow DOM
-if (window.feather) {
-  window.feather.replace({ root: this.shadowRoot });
-}
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        button.setAttribute('aria-expanded', 'false');
+        setIcon(false);
+      });
+    });
 
+    // Initial Feather icon render
+    if (window.feather) {
+      window.feather.replace({ root: this.shadowRoot });
+    }
   }
 }
 
