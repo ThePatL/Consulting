@@ -98,7 +98,7 @@ class CustomFooter extends HTMLElement {
       
       <div class="footer-container">
         <div>
-          <div class="footer-logo">RainbowBridge</div>
+          <div class="footer-logo">Zoe Leyland Consulting</div>
           <p class="footer-description">
             Creating inclusive, equitable organizations through expert EDIDA consulting.
           </p>
@@ -132,21 +132,19 @@ class CustomFooter extends HTMLElement {
         <div>
           <h3 class="footer-heading">Legal</h3>
           <div class="footer-links">
-            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="privacy.html">Privacy Policy</a>
             <a href="#">Terms of Service</a>
-            <a href="accessibility-statement.html">Accessibility Statement</a>
-            <a href="land-acknowledgement.html">Land Acknowledgement</a>
+            <a href="accessibility.html">Accessibility Statement</a>
+            <a href="acknowledgement.html">Land Acknowledgement</a>
 </div>
         </div>
       </div>
       
       <div class="footer-bottom">
         <div>
-          <a href="#">© 2023 RainbowBridge Consulting. All rights reserved.</a>
+          <a href="#">© 2026 WoodLand Media. All rights reserved.</a>
         </div>
         <div class="flex gap-4">
-          <a href="#">English</a>
-          <a href="#">Français</a>
         </div>
       </div>
     `;
