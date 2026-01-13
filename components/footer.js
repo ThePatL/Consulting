@@ -112,10 +112,10 @@ class CustomFooter extends HTMLElement {
         <div>
           <h3 class="footer-heading">Services</h3>
           <div class="footer-links">
-            <a href="consulting.html">Organizational Assessment</a>
-            <a href="consulting.html">Leadership Training</a>
-            <a href="consulting.html">Policy Development</a>
-            <a href="consulting.html">Recruitment Strategy</a>
+            <a href="services.html">Organizational Assessment</a>
+            <a href="services.html">Leadership Training</a>
+            <a href="services.html">Policy Development</a>
+            <a href="services.html">Recruitment Strategy</a>
           </div>
         </div>
         
