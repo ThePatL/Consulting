@@ -124,12 +124,12 @@ class CustomNavbar extends HTMLElement {
 
       <nav>
         <a href="index.html" class="logo">
-          Rainbow<span>Bridge</span>
+          Zoe Leyland<span>Consulting</span>
         </a>
 
         <div class="nav-links">
           <a href="index.html">Home</a>
-          <a href="consulting.html">Services</a>
+          <a href="services.html">Services</a>
           <a href="about.html">About</a>
           <a href="resources.html">Resources</a>
           <a href="contact.html">Contact</a>
@@ -142,7 +142,7 @@ class CustomNavbar extends HTMLElement {
 
       <div class="mobile-menu">
         <a href="index.html">Home</a>
-        <a href="consulting.html">Services</a>
+        <a href="services.html">Services</a>
         <a href="about.html">About</a>
         <a href="resources.html">Resources</a>
         <a href="contact.html">Contact</a>
